@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Backlog Bingo Roulette</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f0f8ff;
+        }
+        #spinner {
+            margin: 20px auto;
+            padding: 20px;
+            border: 5px dashed #007acc;
+            border-radius: 15px;
+            width: 60%;
+            font-size: 24px;
+            background-color: #ffffff;
+            min-height: 100px;
+        }
+        #spinButton {
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+        #spinButton:hover {
+            background-color: #005f99;
+        }
+        #history {
+            margin-top: 30px;
+            text-align: left;
+            width: 60%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #history h3 {
+            color: #007acc;
+        }
+        .history-item {
+            background-color: #e6f2ff;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Backlog Bingo Roulette</h1>
+    <div id="spinner">Click "Spin" to get a backlog scenario!</div>
+    <button id="spinButton" onclick="spin()">🎲 Spin</button>
+    <div id="history">
+        <h3>📜 History</h3>
+        <div id="historyList"></div>
+    </div>
+
+    <script>
+        const scenarios = ["🔍 'We need more details on this story'", "🧩 'Is this even a user story?'", "🕵️ 'Who owns this item?'", "📏 'Can we estimate this now?'", "🛠️ 'Needs technical spike'", "📋 'Missing acceptance criteria'", "🧹 'Let's clean up the backlog'", "📦 'This belongs in the next release'", "🧪 'QA needs more info'", "📉 'This is too big for a sprint'", "📈 'Can we split this story?'", "🧠 'Let's brainstorm this one'", "🗂️ 'Duplicate of another story'", "🧭 'What's the business value?'", "🧱 'Blocked by another task'", "🕰️ 'Not ready for refinement yet'", "📆 'Move this to the next sprint'", "🧾 'Needs better description'", "🧑\u200d💻 'Dev team needs clarification'", "📣 'Stakeholder requested this'", "🧯 'Is this a hotfix or feature?'", "🧮 'Let's re-estimate this'", "🧑\u200d🏫 'PO needs to explain this'", "📊 'Analytics requirement unclear'", "🧳 'Belongs in a different epic'", "🧰 'Needs design input'", "🧼 'Too vague, needs refinement'", "🧞 'Sounds like a wish, not a story'", "🧾 'Add to Definition of Ready'", "🧑\u200d🔧 'Needs API contract defined'"];
+        let usedScenarios = [];
+
+        function spin() {
+            if (usedScenarios.length === scenarios.length) {
+                alert("All scenarios have been used!");
+                return;
+            }
+            let scenario;
+            do {
+                scenario = scenarios[Math.floor(Math.random() * scenarios.length)];
+            } while (usedScenarios.includes(scenario));
+            usedScenarios.push(scenario);
+            document.getElementById("spinner").innerHTML = scenario;
+            const historyItem = document.createElement("div");
+            historyItem.className = "history-item";
+            historyItem.textContent = scenario;
+            document.getElementById("historyList").prepend(historyItem);
+        }
+    </script>
+</body>
+</html>
